@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMJ Digital Space - SMKN 1 Singosari</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0B0F17',
+                        cardbg: '#111827',
+                        cardborder: '#1F2937',
+                        accent: '#F59E0B',
+                        accenthover: '#D97706'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0B0F17;
+            color: #E5E7EB;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .glass-nav {
+            background: rgba(11, 15, 23, 0.85);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+
+    <!-- NAVBAR HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                    <img src="fotologo.jpg" alt="Logo MMJ" class="w-10 h-10 rounded-full object-cover border border-amber-500/50 shadow-md">
+                    <div>
+                        <span class="font-bold text-base md:text-lg tracking-wider text-white block leading-tight">MMJ DIGITAL SPACE</span>
+                        <span class="text-xs text-amber-400 font-medium block">SMK Negeri 1 Singosari</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:text-amber-400 text-gray-300">Beranda</button>
+                    <button onclick="switchTab('archive')" id="nav-archive" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:text-amber-400 text-gray-300">Memory Archive</button>
+                    <button onclick="switchTab('newsroom')" id="nav-newsroom" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:text-amber-400 text-gray-300">Newsroom</button>
+                    <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:text-amber-400 text-gray-300">About MMJ</button>
+                    <button onclick="switchTab('showcase')" id="nav-showcase" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:text-amber-400 text-gray-300">Karya Media</button>
+                    <button onclick="switchTab('feedback')" id="nav-feedback" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:text-amber-400 text-gray-300">Kritik & Saran</button>
+                </nav>
+
+                <!-- Hamburger Mobile Toggle -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-gray-300 hover:text-white focus:outline-none">
+                        <i data-lucide="menu" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900/95 border-b border-gray-800 px-4 pt-2 pb-6 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:bg-gray-800 hover:text-amber-400">Beranda</button>
+            <button onclick="switchTab('archive'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:bg-gray-800 hover:text-amber-400">Memory Archive</button>
+            <button onclick="switchTab('newsroom'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:bg-gray-800 hover:text-amber-400">Newsroom</button>
+            <button onclick="switchTab('about'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:bg-gray-800 hover:text-amber-400">About MMJ</button>
+            <button onclick="switchTab('showcase'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:bg-gray-800 hover:text-amber-400">Karya Media</button>
+            <button onclick="switchTab('feedback'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold text-gray-300 hover:bg-gray-800 hover:text-amber-400">Kritik & Saran</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="pt-28 pb-16 flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- 1. TAB: HOME / BERANDA -->
+            <section id="tab-home" class="tab-content active animate-fade-in">
+                <!-- HERO SECTION -->
+                <div class="text-center py-12 md:py-16">
+                    <div class="inline-block relative">
+                        <img src="fotologo.jpg" alt="Logo MMJ" class="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mx-auto mb-6 border-2 border-amber-500/80 shadow-2xl shadow-amber-500/20">
+                    </div>
+                    <h1 class="text-3xl md:text-6xl font-extrabold text-white tracking-tight mb-3">
+                        MMJ DIGITAL SPACE
+                    </h1>
+                    <p class="text-amber-400 font-semibold text-sm md:text-lg tracking-widest uppercase mb-6">
+                        Multimedia Jurnalistik &middot; SMK Negeri 1 Singosari
+                    </p>
+                    <div class="max-w-2xl mx-auto bg-gray-900/60 border border-gray-800 rounded-2xl p-6 backdrop-blur-sm shadow-xl">
+                        <span class="text-xs uppercase font-bold text-gray-500 tracking-widest block mb-1">Tagline</span>
+                        <p class="text-xl md:text-2xl font-black text-amber-500 tracking-wider">
+                            "CAPTURE THE MOMENT, PRESERVE THE STORY."
+                        </p>
+                        <p class="text-gray-400 mt-2 text-sm md:text-base font-light italic">
+                            &ldquo;Setiap momen punya cerita.&rdquo;
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FEATURE SHORTCUT CARDS -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Shortcut 1: Memory Archive -->
+                    <div onclick="switchTab('archive')" class="group bg-cardbg border border-cardborder hover:border-amber-500/50 rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/10">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-black transition-colors">
+                            <i data-lucide="archive" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">Memory Archive</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Arsip dokumentasi foto dan video kegiatan, acara penting, serta momen bersejarah di SMKN 1 Singosari.</p>
+                        <span class="inline-flex items-center text-xs font-bold text-amber-400 group-hover:translate-x-1 transition-transform">
+                            Jelajahi Arsip <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </span>
+                    </div>
+
+                    <!-- Shortcut 2: Newsroom -->
+                    <div onclick="switchTab('newsroom')" class="group bg-cardbg border border-cardborder hover:border-amber-500/50 rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/10">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-black transition-colors">
+                            <i data-lucide="newspaper" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">Newsroom</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Portal publikasi berita resmi, artikel edukatif, serta liputan mendalam seputar kegiatan sekolah.</p>
+                        <span class="inline-flex items-center text-xs font-bold text-amber-400 group-hover:translate-x-1 transition-transform">
+                            Baca Berita <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </span>
+                    </div>
+
+                    <!-- Shortcut 3: About MMJ -->
+                    <div onclick="switchTab('about')" class="group bg-cardbg border border-cardborder hover:border-amber-500/50 rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/10">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-black transition-colors">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">About MMJ</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Profil organisasi Multimedia Jurnalistik, penjelasan 3 divisi kerja (Kamera, Jurnalis, Editing) & Humas.</p>
+                        <span class="inline-flex items-center text-xs font-bold text-amber-400 group-hover:translate-x-1 transition-transform">
+                            Lihat Profil <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. TAB: MEMORY ARCHIVE -->
+            <section id="tab-archive" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-extrabold text-white mb-2">Memory Archive</h2>
+                    <p class="text-gray-400 text-sm">Dokumentasi momen dan agenda kegiatan resmi SMKN 1 Singosari.</p>
+                </div>
+
+                <!-- FILTER & SEARCH BAR -->
+                <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between items-center">
+                    <div class="relative w-full md:w-80">
+                        <i data-lucide="search" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                        <input type="text" id="archive-search" oninput="filterArchives()" placeholder="Cari dokumentasi..." class="w-full bg-cardbg border border-cardborder rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                        <button onclick="setArchiveCategory('all')" class="archive-cat-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-black">Semua</button>
+                        <button onclick="setArchiveCategory('Pengenalan Lingkungan')" class="archive-cat-btn px-4 py-2 rounded-xl text-xs font-semibold bg-cardbg border border-cardborder text-gray-300 hover:text-amber-400">MPLS</button>
+                        <button onclick="setArchiveCategory('Seni & Kreativitas')" class="archive-cat-btn px-4 py-2 rounded-xl text-xs font-semibold bg-cardbg border border-cardborder text-gray-300 hover:text-amber-400">Augustema</button>
+                        <button onclick="setArchiveCategory('Perayaan Sekolah')" class="archive-cat-btn px-4 py-2 rounded-xl text-xs font-semibold bg-cardbg border border-cardborder text-gray-300 hover:text-amber-400">Diesnatalis 75</button>
+                    </div>
+                </div>
+
+                <!-- ARCHIVE GRID -->
+                <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Injected via JS -->
+                </div>
+            </section>
+
+            <!-- 3. TAB: NEWSROOM -->
+            <section id="tab-newsroom" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-extrabold text-white mb-2">Newsroom MMJ</h2>
+                    <p class="text-gray-400 text-sm">Publikasi berita terkini, artikel liputan, dan kabar kegiatan sekolah.</p>
+                </div>
+
+                <!-- NEWS LIST GRID -->
+                <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Injected via JS -->
+                </div>
+            </section>
+
+            <!-- 4. TAB: ABOUT MMJ -->
+            <section id="tab-about" class="tab-content">
+                <div class="mb-10 text-center max-w-3xl mx-auto">
+                    <span class="text-xs uppercase tracking-widest font-bold text-amber-400 block mb-2">Profil Organisasi</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Multimedia Jurnalistik (MMJ)</h2>
+                    <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                        Multimedia Jurnalistik SMKN 1 Singosari adalah wadah kreativitas dan pengembangan bakat siswa dalam bidang jurnalistik modern, produksi media, dokumentasi visual, serta penyampaian informasi yang akurat dan edukatif bagi seluruh warga sekolah.
+                    </p>
+                </div>
+
+                <!-- 3 DIVISI UTAMA -->
+                <div class="mb-14">
+                    <h3 class="text-xl font-bold text-white mb-6 border-l-4 border-amber-500 pl-3">Tiga Divisi Kerja Utama</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Divisi 1: Kamera -->
+                        <div class="bg-cardbg border border-cardborder rounded-2xl p-6 hover:border-amber-500/40 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4">
+                                <i data-lucide="camera" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">1. Divisi Kamera</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">Bertanggung jawab penuh atas pengambilan gambar diam (fotografi) dan dokumentasi video (videografi) dalam setiap kegiatan internal maupun eksternal sekolah.</p>
+                            <ul class="text-xs text-gray-300 space-y-1.5 list-disc list-inside">
+                                <li>Penguasaan teknik pencahayaan & angle</li>
+                                <li>Dokumentasi event & momen penting</li>
+                                <li>Pemeliharaan perangkat kamera MMJ</li>
+                            </ul>
+                        </div>
+
+                        <!-- Divisi 2: Jurnalis -->
+                        <div class="bg-cardbg border border-cardborder rounded-2xl p-6 hover:border-amber-500/40 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4">
+                                <i data-lucide="pen-tool" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">2. Divisi Jurnalis</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">Bertugas melakukan wawancara, riset informasi, penyusunan naskah liputan, dan penulisan artikel berita yang objektif untuk dipublikasikan.</p>
+                            <ul class="text-xs text-gray-300 space-y-1.5 list-disc list-inside">
+                                <li>Wawancara narasumber & fakta acara</li>
+                                <li>Penulisan berita (Newsroom & Press Release)</li>
+                                <li>Riset isu & materi berita sekolah</li>
+                            </ul>
+                        </div>
+
+                        <!-- Divisi 3: Editing -->
+                        <div class="bg-cardbg border border-cardborder rounded-2xl p-6 hover:border-amber-500/40 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4">
+                                <i data-lucide="film" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">3. Divisi Editing</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">Mengolah hasil rekaman mentah (raw photo & video) menjadi karya visual berkualitas, video highlight, cinematic aftermovie, serta tata letak media.</p>
+                            <ul class="text-xs text-gray-300 space-y-1.5 list-disc list-inside">
+                                <li>Color grading & pengolahan foto/video</li>
+                                <li>Penyusunan video aftermovie & reels</li>
+                                <li>Desain grafis pendukung publikasi</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTACT PERSON HUMAS SECTION -->
+                <div class="bg-gradient-to-r from-gray-900 via-cardbg to-gray-900 border border-amber-500/30 rounded-2xl p-8 max-w-2xl mx-auto shadow-xl">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-500 text-black flex items-center justify-center font-bold">
+                            <i data-lucide="phone-call" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Hubungan Masyarakat (Humas)</h4>
+                            <p class="text-xs text-amber-400">Pusat Layanan Informasi & Kerjasama Resmi MMJ</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Untuk keperluan undangan liputan acara, kerjasama media, konfirmasi berita, atau pertanyaan seputar Multimedia Jurnalistik SMKN 1 Singosari, silakan hubungi kontak resmi Humas di bawah ini:
+                    </p>
+                    <div class="bg-gray-950/80 rounded-xl p-4 border border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <div>
+                            <span class="text-xs text-gray-500 block">Contact Person Humas:</span>
+                            <span class="text-base font-bold text-white">Humas Multimedia Jurnalistik</span>
+                        </div>
+                        <a href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">
+                            <i data-lucide="message-square" class="w-4 h-4 mr-2"></i> Hubungi via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. TAB: KARYA MEDIA (GOOGLE DRIVE SHOWCASE) -->
+            <section id="tab-showcase" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-extrabold text-white mb-2">Karya Media Visual</h2>
+                    <p class="text-gray-400 text-sm">Galeri hasil karya Fotografi dan Videografi siswa Multimedia Jurnalistik tersimpan di Google Drive.</p>
+                </div>
+
+                <!-- GDRIVE SHOWCASE CONTAINER -->
+                <div class="bg-cardbg border border-cardborder rounded-2xl p-6 md:p-8 shadow-xl text-center">
+                    <div class="max-w-xl mx-auto mb-6">
+                        <div class="w-16 h-16 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="folder-open" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Penyimpanan Folder Karya MMJ</h3>
+                        <p class="text-gray-400 text-sm mb-6">Akses seluruh koleksi lengkap foto, video, poster, dan feeds media sosial langsung melalui Google Drive resmi.</p>
+                        <a href="https://drive.google.com/drive/folders/1v_Gc2uE2d33IYnjRMlUfMs1w5TdpMZaq" target="_blank" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-black font-extrabold px-8 py-4 rounded-xl text-base shadow-lg shadow-amber-500/20 transition-all hover:scale-105">
+                            <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Buka Google Drive Karya Media
+                        </a>
+                    </div>
+
+                    <!-- IFRAME EMBED GDRIVE -->
+                    <div class="mt-6">
+                        <div class="w-full h-[500px] bg-gray-950 rounded-xl border border-gray-800 overflow-hidden">
+                            <iframe src="https://drive.google.com/drive/folders/1v_Gc2uE2d33IYnjRMlUfMs1w5TdpMZaq" class="w-full h-full border-0" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. TAB: KRITIK & SARAN -->
+            <section id="tab-feedback" class="tab-content">
+                <div class="max-w-3xl mx-auto">
+                    <div class="mb-8 text-center">
+                        <h2 class="text-3xl font-extrabold text-white mb-2">Kritik & Saran</h2>
+                        <p class="text-gray-400 text-sm">Suara Anda sangat berharga untuk kemajuan & evaluasi Multimedia Jurnalistik SMKN 1 Singosari.</p>
+                    </div>
+
+                    <!-- GFORM EMBED CONTAINER -->
+                    <div class="bg-cardbg border border-cardborder rounded-2xl p-6 md:p-8 shadow-xl mb-8">
+                        
+                        <!-- ACTION BUTTON TO EXTERNAL GFORM -->
+                        <div class="text-center py-4 mb-6">
+                            <a id="gform-direct-btn" href="https://forms.gle/AKAkCWLmWYb3NnDy6" target="_blank" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-black font-extrabold px-8 py-4 rounded-xl text-base shadow-lg shadow-amber-500/20 transition-all hover:scale-105">
+                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Buka Google Form Kritik & Saran
+                            </a>
+                        </div>
+
+                        <!-- IFRAME EMBED PREVIEW -->
+                        <div class="mt-4">
+                            <h4 class="text-sm font-bold text-gray-300 mb-3 flex items-center">
+                                <i data-lucide="file-text" class="w-4 h-4 mr-2 text-amber-400"></i> Formulir Tanggapan Online:
+                            </h4>
+                            <div class="w-full h-[500px] bg-gray-950 rounded-xl border border-gray-800 overflow-hidden">
+                                <iframe src="https://forms.gle/AKAkCWLmWYb3NnDy6" class="w-full h-full border-0" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <img src="fotologo.jpg" alt="Logo MMJ" class="w-8 h-8 rounded-full object-cover border border-amber-500/40">
+                <span class="text-white font-bold text-sm tracking-wide">MMJ DIGITAL SPACE</span>
+            </div>
+            <p class="text-xs text-gray-500">
+                &copy; 2026 Multimedia Jurnalistik SMK Negeri 1 Singosari. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODAL POPUP FOR ARCHIVE LIGHTBOX -->
+    <div id="archive-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-cardbg border border-cardborder rounded-2xl max-w-3xl w-full overflow-hidden relative shadow-2xl">
+            <button onclick="closeArchiveModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white bg-black/50 rounded-full p-2 z-10">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <img id="modal-img" src="" alt="Detail Image" class="w-full max-h-96 object-cover">
+            <div class="p-6">
+                <span id="modal-category" class="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-1"></span>
+                <h3 id="modal-title" class="text-2xl font-bold text-white mb-2"></h3>
+                <p id="modal-date" class="text-xs text-gray-400 mb-4"></p>
+                <p id="modal-desc" class="text-sm text-gray-300 leading-relaxed mb-6"></p>
+                <!-- GDRIVE LINK BUTTON IN MODAL -->
+                <a id="modal-gdrive-btn" href="#" target="_blank" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-colors">
+                    <i data-lucide="folder-open" class="w-4 h-4 mr-2"></i> Buka Folder / File di Google Drive
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP FOR NEWS DETAIL -->
+    <div id="news-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-cardbg border border-cardborder rounded-2xl max-w-3xl w-full my-8 overflow-hidden relative shadow-2xl">
+            <button onclick="closeNewsModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white bg-black/50 rounded-full p-2 z-10">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <img id="news-modal-img" src="" alt="News Detail Image" class="w-full h-72 object-cover">
+            <div class="p-6 md:p-8">
+                <span id="news-modal-cat" class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-400 mb-3"></span>
+                <h2 id="news-modal-title" class="text-2xl md:text-3xl font-extrabold text-white mb-3"></h2>
+                <div class="flex items-center space-x-4 text-xs text-gray-400 mb-6 border-b border-gray-800 pb-4">
+                    <span id="news-modal-author" class="font-semibold text-gray-300"></span>
+                    <span>&bull;</span>
+                    <span id="news-modal-date"></span>
+                </div>
+                <div id="news-modal-body" class="text-sm text-gray-300 space-y-4 leading-relaxed"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT CODE -->
+    <script>
+        // DATA DOKUMENTASI MEMORY ARCHIVE (MPLS, Augustema, Diesnatalis 75 dengan file lokal & GDrive link)
+        const archiveData = [
+            {
+                id: 1,
+                title: "Masa Pengenalan Lingkungan Sekolah (MPLS)",
+                category: "Pengenalan Lingkungan",
+                date: "Juli 2026",
+                image: "fotompls.jpg",
+                desc: "Dokumentasi kegiatan MPLS peserta didik baru SMKN 1 Singosari, penuh antusiasme dan pengenalan dunia kejuruan.",
+                gdrive_link: "https://drive.google.com/drive/folders/1v_Gc2uE2d33IYnjRMlUfMs1w5TdpMZaq"
+            },
+            {
+                id: 2,
+                title: "Pentas Seni & Kreativitas Augustema",
+                category: "Seni & Kreativitas",
+                date: "Agustus 2026",
+                image: "augustema.jpg",
+                desc: "Aksi pameran karya, pentas seni meriah, dan ekspresi bakat siswa dalam perayaan event Augustema.",
+                gdrive_link: "https://drive.google.com/drive/folders/1v_Gc2uE2d33IYnjRMlUfMs1w5TdpMZaq"
+            },
+            {
+                id: 3,
+                title: "Diesnatalis 75 SMKN 1 Singosari",
+                category: "Perayaan Sekolah",
+                date: "Oktober 2026",
+                image: "diesnat.jpg",
+                desc: "Puncak perayaan Dies Natalis ke-75 SMK Negeri 1 Singosari dengan berbagai rangkaian acara spektakuler.",
+                gdrive_link: "https://drive.google.com/drive/folders/1v_Gc2uE2d33IYnjRMlUfMs1w5TdpMZaq"
+            }
+        ];
+
+        // DATA NEWSROOM (5 BERITA)
+        const newsData = [
+            {
+                id: 1,
+                title: "Liputan Khusus: Kunjungan Industri Kompetensi Keahlian SMKN 1 Singosari",
+                category: "Kunjungan Industri",
+                date: "25 Oktober 2026",
+                author: "Divisi Jurnalis MMJ",
+                image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+                summary: "Siswa SMKN 1 Singosari melakukan studi lapangan ke mitra industri terkemuka untuk memperluas wawasan dunia kerja.",
+                body: "SMK Negeri 1 Singosari kembali memperkuat komitmen penyerapan lulusan dengan menggelar kunjungan industri. Kegiatan ini diikuti oleh ratusan siswa yang antusias mempelajari perkembangan teknologi terkini di dunia usaha dan dunia industri (DUDI)."
+            },
+            {
+                id: 2,
+                title: "Pelatihan Videografi & Live Streaming Tim MMJ Bersama Praktisi Media",
+                category: "Workshop MMJ",
+                date: "14 Oktober 2026",
+                author: "Tim Jurnalistik",
+                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
+                summary: "Anggota Multimedia Jurnalistik mendapatkan pembekalan teknik penataan kamera dan streaming profesional.",
+                body: "Guna meningkatkan kualitas tayangan acara sekolah, MMJ menyelenggarakan workshop internal bersama profesional broadcasting. Materi mencakup komposisi video, manajemen audio, serta multi-camera setup."
+            },
+            {
+                id: 3,
+                title: "Inovasi Karya Teknologi Tepat Guna Siswa SMKN 1 Singosari di Tingkat Jawa Timur",
+                category: "Prestasi",
+                date: "02 Oktober 2026",
+                author: "Redaksi MMJ",
+                image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+                summary: "Perwakilan siswa SMKN 1 Singosari berhasil meraih penghargaan bergengsi berkat inovasi teknologi berbahan ramah lingkungan.",
+                body: "Kabar membanggakan datang dari ajang kompetisi sains dan teknologi Jawa Timur. Tim inovasi sekolah berhasil menyabet gelar juara berkat proyek alat pengolah limbah ramah lingkungan."
+            },
+            {
+                id: 4,
+                title: "Peringatan Hari Sumpah Pemuda: Semangat Kebangsaan Siswa Generasi Z",
+                category: "Kegiatan Sekolah",
+                date: "28 September 2026",
+                author: "Divisi Jurnalis MMJ",
+                image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
+                summary: "Upacara dan peragaan busana adat nusantara meriahkan peringatan Hari Sumpah Pemuda di sekolah.",
+                body: "Dengan mengenakan berbagai pakaian adat khas daerah Indonesia, seluruh siswa dan guru SMKN 1 Singosari merayakan Sumpah Pemuda dengan penuh semangat kebhinekaan."
+            },
+            {
+                id: 5,
+                title: "Tips Mengambil Foto Highlight Kegiatan Sekolah yang Estetik & Tajam",
+                category: "Edukasi Jurnalistik",
+                date: "10 September 2026",
+                author: "Divisi Kamera MMJ",
+                image: "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=800&q=80",
+                summary: "Artikel panduan dasar memilih ISO, Shutter Speed, dan Aperture untuk fotografi momen olahraga dan panggung.",
+                body: "Memotret kegiatan sekolah dengan pencahayaan berubah-ubah membutuhkan trik khusus. Tim Kamera MMJ membagikan panduan praktis pengaturan segitiga eksposur agar hasil foto tidak blur."
+            }
+        ];
+
+        let currentArchiveCategory = 'all';
+
+        // TAB SWITCHING FUNCTION
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-amber-400', 'bg-gray-800/60');
+                btn.classList.add('text-gray-300');
+            });
+
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('text-amber-400', 'bg-gray-800/60');
+                activeNav.classList.remove('text-gray-300');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // MEMORY ARCHIVE RENDER & FILTER
+        function renderArchives() {
+            const grid = document.getElementById('archive-grid');
+            const searchVal = document.getElementById('archive-search').value.toLowerCase();
+            
+            const filtered = archiveData.filter(item => {
+                const matchCat = currentArchiveCategory === 'all' || item.category === currentArchiveCategory;
+                const matchSearch = item.title.toLowerCase().includes(searchVal) || item.desc.toLowerCase().includes(searchVal);
+                return matchCat && matchSearch;
+            });
+
+            grid.innerHTML = filtered.map(item => `
+                <div onclick="openArchiveModal(${item.id})" class="bg-cardbg border border-cardborder rounded-2xl overflow-hidden cursor-pointer hover:border-amber-500/50 transition-all group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-amber-400 text-xs px-3 py-1 rounded-full font-bold">${item.category}</span>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs text-gray-500 block mb-1">${item.date}</span>
+                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">${item.title}</h3>
+                        <p class="text-xs text-gray-400 line-clamp-2">${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setArchiveCategory(cat) {
+            currentArchiveCategory = cat;
+            document.querySelectorAll('.archive-cat-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-black');
+                btn.classList.add('bg-cardbg', 'text-gray-300');
+            });
+            event.target.classList.add('bg-amber-500', 'text-black');
+            event.target.classList.remove('bg-cardbg', 'text-gray-300');
+            renderArchives();
+        }
+
+        function filterArchives() {
+            renderArchives();
+        }
+
+        function openArchiveModal(id) {
+            const item = archiveData.find(a => a.id === id);
+            if (!item) return;
+            document.getElementById('modal-img').src = item.image;
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-category').innerText = item.category;
+            document.getElementById('modal-date').innerText = item.date;
+            document.getElementById('modal-desc').innerText = item.desc;
+            document.getElementById('modal-gdrive-btn').href = item.gdrive_link;
+            document.getElementById('archive-modal').classList.remove('hidden');
+        }
+
+        function closeArchiveModal() {
+            document.getElementById('archive-modal').classList.add('hidden');
+        }
+
+        // NEWSROOM RENDER & MODAL
+        function renderNews() {
+            const grid = document.getElementById('news-grid');
+            grid.innerHTML = newsData.map(item => `
+                <div onclick="openNewsModal(${item.id})" class="bg-cardbg border border-cardborder rounded-2xl overflow-hidden cursor-pointer hover:border-amber-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-amber-500 text-black text-xs px-3 py-1 rounded-full font-bold">${item.category}</span>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center space-x-2 text-xs text-gray-500 mb-2">
+                                <span>${item.author}</span>
+                                <span>&bull;</span>
+                                <span>${item.date}</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors leading-snug">${item.title}</h3>
+                            <p class="text-xs text-gray-400 line-clamp-3 leading-relaxed">${item.summary}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5">
+                        <span class="text-xs font-bold text-amber-400 flex items-center">
+                            Baca Artikel Lengkap <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openNewsModal(id) {
+            const item = newsData.find(n => n.id === id);
+            if (!item) return;
+            document.getElementById('news-modal-img').src = item.image;
+            document.getElementById('news-modal-title').innerText = item.title;
+            document.getElementById('news-modal-cat').innerText = item.category;
+            document.getElementById('news-modal-author').innerText = item.author;
+            document.getElementById('news-modal-date').innerText = item.date;
+            document.getElementById('news-modal-body').innerHTML = `<p>${item.body}</p><p class="mt-4">Dokumentasi dan peliputan ini dikelola secara penuh oleh Tim Redaksi Multimedia Jurnalistik SMKN 1 Singosari.</p>`;
+            document.getElementById('news-modal').classList.remove('hidden');
+        }
+
+        function closeNewsModal() {
+            document.getElementById('news-modal').classList.add('hidden');
+        }
+
+        // INITIALIZATION
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderArchives();
+            renderNews();
+        });
+    </script>
+</body>
+</html>
